@@ -16,7 +16,10 @@
     "react-native": "0.71.6",
     "styled-components": "^5.3.9",
     "expo-splash-screen": "~0.18.1",
-    "expo-system-ui": "~2.2.1"
+    "expo-system-ui": "~2.2.1",
+    "expo-web-browser": "~12.1.1",
+    "expo-auth-session": "~4.0.3",
+    "expo-crypto": "~12.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
