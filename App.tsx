@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'styled-components/native';
 import { StatusBar } from 'react-native';
 import { AppProvider, UserProvider } from '@realm/react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
 
 import theme from './src/theme';
@@ -27,15 +28,17 @@ export default function App() {
 
   return (
     <AppProvider id={REALM_APP_ID}>
-        <ThemeProvider theme={theme}>
-        <StatusBar 
-          barStyle="light-content" 
-          backgroundColor="transparent" 
-          translucent 
-        />
-        <UserProvider fallback={SignIn}>
-          <Routes />
-        </UserProvider>
+      <ThemeProvider theme={theme}>
+        <SafeAreaProvider>
+          <StatusBar 
+            barStyle="light-content" 
+            backgroundColor="transparent" 
+            translucent 
+          />
+          <UserProvider fallback={SignIn}>
+            <Routes />
+          </UserProvider>
+        </SafeAreaProvider>
       </ThemeProvider>
     </AppProvider>
     
