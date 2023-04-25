@@ -11,12 +11,18 @@ PODS:
     - ExpoModulesCore
   - Expo (48.0.11):
     - ExpoModulesCore
+  - ExpoCrypto (12.2.2):
+    - ExpoModulesCore
   - ExpoKeepAwake (12.0.1):
     - ExpoModulesCore
   - ExpoModulesCore (1.2.6):
     - React-Core
     - React-RCTAppDelegate
     - ReactCommon/turbomodule/core
+  - ExpoSystemUI (2.2.1):
+    - ExpoModulesCore
+  - ExpoWebBrowser (12.1.1):
+    - ExpoModulesCore
   - EXSplashScreen (0.18.1):
     - ExpoModulesCore
     - React-Core
@@ -369,6 +375,8 @@ PODS:
     - React-jsi (= 0.71.6)
     - React-logger (= 0.71.6)
     - React-perflogger (= 0.71.6)
+  - RealmJS (11.8.0):
+    - React
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -379,8 +387,11 @@ DEPENDENCIES:
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
   - EXFont (from `../node_modules/expo-font/ios`)
   - Expo (from `../node_modules/expo`)
+  - ExpoCrypto (from `../node_modules/expo-crypto/ios`)
   - ExpoKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core`)
+  - ExpoSystemUI (from `../node_modules/expo-system-ui/ios`)
+  - ExpoWebBrowser (from `../node_modules/expo-web-browser/ios`)
   - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -415,6 +426,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RealmJS (from `../node_modules/realm`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -437,10 +449,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-font/ios"
   Expo:
     :path: "../node_modules/expo"
+  ExpoCrypto:
+    :path: "../node_modules/expo-crypto/ios"
   ExpoKeepAwake:
     :path: "../node_modules/expo-keep-awake/ios"
   ExpoModulesCore:
     :path: "../node_modules/expo-modules-core"
+  ExpoSystemUI:
+    :path: "../node_modules/expo-system-ui/ios"
+  ExpoWebBrowser:
+    :path: "../node_modules/expo-web-browser/ios"
   EXSplashScreen:
     :path: "../node_modules/expo-splash-screen/ios"
   FBLazyVector:
@@ -505,6 +523,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RealmJS:
+    :path: "../node_modules/realm"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -516,8 +536,11 @@ SPEC CHECKSUMS:
   EXFileSystem: 844e86ca9b5375486ecc4ef06d3838d5597d895d
   EXFont: 6ea3800df746be7233208d80fe379b8ed74f4272
   Expo: 81418098ffb16914b2e190f54e06db923248e4a1
+  ExpoCrypto: 9105610a09cd6290b900bd82fc5d190e489125a3
   ExpoKeepAwake: 69f5f627670d62318410392d03e0b5db0f85759a
   ExpoModulesCore: 6e0259511f4c4341b6b8357db393624df2280828
+  ExpoSystemUI: 0be5173ee2a7c01e9abc44f56d879a1eaaa16527
+  ExpoWebBrowser: 033d34c478d9986da2f1679729041423837626e0
   EXSplashScreen: cd7fb052dff5ba8311d5c2455ecbebffe1b7a8ca
   FBLazyVector: a83ceaa8a8581003a623facdb3c44f6d4f342ac5
   FBReactNativeSpec: 85eee79837cb797ab6176f0243a2b40511c09158
@@ -552,6 +575,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 73d201599a64ea14b4e0b8f91b64970979fd92e6
   React-runtimeexecutor: 8692ac548bec648fa121980ccb4304afd136d584
   ReactCommon: 0c43eaeaaee231d7d8dc24fc5a6e4cf2b75bf196
+  RealmJS: 27b8d695fa4bc9606a4a4a378de55511edc2084c
   Yoga: ba09b6b11e6139e3df8229238aa794205ca6a02a
 
 PODFILE CHECKSUM: d8fb3938a22ce288c27377b778e667e9bcc76d32
