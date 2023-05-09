@@ -9,6 +9,7 @@ import theme from './src/theme';
 import { REALM_APP_ID } from '@env';
 
 import { Routes } from './src/routes';
+import { RealmProvider } from './src/libs/realm';
 
 import { SignIn } from './src/screens/SignIn';
 import { Loading } from './src/components/Loading';
@@ -36,7 +37,9 @@ export default function App() {
             translucent 
           />
           <UserProvider fallback={SignIn}>
-            <Routes />
+            <RealmProvider>
+              <Routes />
+            </RealmProvider>
           </UserProvider>
         </SafeAreaProvider>
       </ThemeProvider>
