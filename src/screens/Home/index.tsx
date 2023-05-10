@@ -1,5 +1,5 @@
-import { Alert } from 'react-native';
 import { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useQuery } from '../../libs/realm';
@@ -18,7 +18,11 @@ export function Home() {
   const historic = useQuery(Historic)
 
   function handleRegisterMoviment() {
-    navigate('departure')
+    if(vehicleInUse?._id) {
+      navigate('arrival', { id: vehicleInUse._id.toString() });
+    } else {
+      navigate('departure')
+    }
   }
 
   function fetchVehicle() {
