@@ -1,17 +1,30 @@
 import { useNavigation } from '@react-navigation/native';
 
-import { Container, Content } from './styles';
+import { useQuery } from '../../libs/realm';
+import { Historic } from '../../libs/realm/schemas/Historic';
 
 import { HomeHeader } from '../../components/HomeHeader';
 import { CarStatus } from '../../components/CarStatus';
 
-export function Home() {
+import { Container, Content } from './styles';
+import { useEffect } from 'react';
 
+export function Home() {
   const { navigate } = useNavigation();
+
+  const historic = useQuery(Historic)
 
   function handleRegisterMoviment() {
     navigate('departure')
   }
+
+  function fetchVehicle() {
+    console.log(historic);
+  }
+
+  useEffect(() => {
+    fetchVehicle();
+  },[])
 
   return (
     <Container>
