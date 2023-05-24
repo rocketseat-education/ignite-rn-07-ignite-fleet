@@ -3,6 +3,7 @@ import { Alert, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import dayjs from 'dayjs';
 
+import { useUser } from '@realm/react';
 import { useQuery, useRealm } from '../../libs/realm';
 import { Historic } from '../../libs/realm/schemas/Historic';
 
@@ -19,6 +20,7 @@ export function Home() {
   const { navigate } = useNavigation();
 
   const historic = useQuery(Historic);
+  const user = useUser();
   const realm = useRealm();
 
   function handleRegisterMoviment() {
@@ -77,7 +79,15 @@ export function Home() {
 
   useEffect(() => {
     fetchHistoric();
-  },[historic]);  
+  },[historic]);
+
+  useEffect(() => {
+    realm.subscriptions.update((mutableSubs, realm) => {
+      const historicByUserQuery = realm.objects('Historic').filtered(`user_id = '${user!.id}'`);
+
+      mutableSubs.add(historicByUserQuery, { name: 'hostoric_by_user' });
+    })
+  },[realm]);
 
   return (
     <Container>
