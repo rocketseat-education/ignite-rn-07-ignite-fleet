@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { TextInput, ScrollView, Alert } from 'react-native';
 
+import { CarSimple } from 'phosphor-react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { useNavigation } from '@react-navigation/native';
@@ -135,6 +136,7 @@ export function Departure() {
             {
               currentAddress &&
               <LocationInfo
+                icon={CarSimple}
                 label='Localização atual'
                 description={currentAddress}
               />
