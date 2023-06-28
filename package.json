@@ -35,7 +35,8 @@
     "react-native-toast-message": "^2.1.6",
     "realm": "^11.8.0",
     "styled-components": "^5.3.9",
-    "expo-location": "~15.1.1"
+    "expo-location": "~15.1.1",
+    "react-native-maps": "1.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
