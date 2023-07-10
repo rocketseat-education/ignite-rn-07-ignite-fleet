@@ -28,6 +28,7 @@ import { Map } from '../../components/Map'
 
 import { licensePlateValidate } from '../../utils/licensePlateValidate';
 import { getAddressLocation } from '../../utils/getAddressLocation';
+import { startLocationTask } from '../../tasks/backgroundLocationTask';
 
 import { Container, Content, Message } from './styles';
 
@@ -73,6 +74,8 @@ export function Departure() {
         setIsResgistering(false)
         return Alert.alert('Localização', 'É necessário permitir que o App tenha acesso localização em segundo plano. Acesse as configurações do dispositivo e habilite "Permitir o tempo todo."')
       }
+
+      await startLocationTask();
 
       realm.write(() => {
         realm.create('Historic', Historic.generate({
