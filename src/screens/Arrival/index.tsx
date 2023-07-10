@@ -11,6 +11,7 @@ import { Button } from '../../components/Button';
 import { ButtonIcon } from '../../components/ButtonIcon';
 import { Map } from '../../components/Map';
 import { Locations } from '../../components/Locations';
+import { Loading } from '../../components/Loading';
 
 import { Container, Content, Description, Footer, Label, LicensePlate, AsyncMessage } from './styles';
 
@@ -31,6 +32,7 @@ export function Arrival() {
   const [coordinates, setCoordinates] = useState<LatLng[]>([])
   const [departure, setDeparture] = useState<LocationInfoProps>({} as LocationInfoProps)
   const [arrival, setArrival] = useState<LocationInfoProps | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   const route = useRoute();
   const { id } = route.params as RouteParamProps;
@@ -123,6 +125,8 @@ export function Arrival() {
         description: dayjs(new Date(lastLocation.timestamp)).format('DD/MM/YYYY [às] HH:mm')
       })
     }
+
+    setIsLoading(false)
     
   }
 
@@ -130,6 +134,11 @@ export function Arrival() {
     getLocationsInfo()
   },[historic])
   
+
+  if(isLoading) {
+    return <Loading />
+  }
+
   return (
     <Container>
       <Header title={title} />
