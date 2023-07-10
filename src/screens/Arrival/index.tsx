@@ -4,6 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { X } from 'phosphor-react-native';
 import { BSON } from 'realm';
 import { LatLng } from 'react-native-maps';
+import dayjs from 'dayjs';
 
 import { Header } from '../../components/Header';
 import { Button } from '../../components/Button';
@@ -18,6 +19,8 @@ import { useObject, useRealm } from '../../libs/realm';
 import { getLastAsyncTimestamp } from '../../libs/asyncStorage/syncStorage';
 import { getStorageLocations } from '../../libs/asyncStorage/locationStorage';
 import { stopLocationTask } from '../../tasks/backgroundLocationTask';
+import { getAddressLocation } from '../../utils/getAddressLocation';
+import { LocationInfoProps } from '../../components/LocationInfo';
 
 type RouteParamProps = {
   id: string;
@@ -26,6 +29,8 @@ type RouteParamProps = {
 export function Arrival() {
   const [dataNotSynced, setDataNotSynced] = useState(false);
   const [coordinates, setCoordinates] = useState<LatLng[]>([])
+  const [departure, setDeparture] = useState<LocationInfoProps>({} as LocationInfoProps)
+  const [arrival, setArrival] = useState<LocationInfoProps | null>(null)
 
   const route = useRoute();
   const { id } = route.params as RouteParamProps;
@@ -100,6 +105,24 @@ export function Arrival() {
       setCoordinates(historic?.coords ?? []);
     }
 
+    if(historic?.coords[0]) {
+      const departureStreetName = await getAddressLocation(historic?.coords[0])
+
+      setDeparture({
+        label: `Saíndo em ${departureStreetName ?? ''}`,
+        description: dayjs(new Date(historic?.coords[0].timestamp)).format('DD/MM/YYYY [às] HH:mm')
+      })
+    }
+
+    if(historic?.status === 'arrival') {
+      const lastLocation = historic.coords[historic.coords.length - 1];
+      const arrivalStreetName = await getAddressLocation(lastLocation)
+
+      setArrival({
+        label: `Chegando em ${arrivalStreetName ?? ''}`,
+        description: dayjs(new Date(lastLocation.timestamp)).format('DD/MM/YYYY [às] HH:mm')
+      })
+    }
     
   }
 
@@ -117,8 +140,8 @@ export function Arrival() {
 
       <Content>
         <Locations 
-          departure={{ label: 'Saída', description: 'Saída teste' }}
-          arrival={{ label: 'Chegada', description: 'Chegada teste' }}
+          departure={departure}
+          arrival={arrival}
         />
 
         <Label>

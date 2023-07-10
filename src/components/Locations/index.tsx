@@ -6,10 +6,10 @@ import { Container, Line } from './styles';
 
 type Props = {
   departure: LocationInfoProps,
-  arrival: LocationInfoProps
+  arrival?: LocationInfoProps | null
 }
 
-export function Locations({ arrival, departure }: Props) {
+export function Locations({ arrival = null, departure }: Props) {
   return (
     <Container>
       <LocationInfo 
@@ -18,13 +18,18 @@ export function Locations({ arrival, departure }: Props) {
         description={departure.description}
       />
 
-      <Line />
+      {arrival && (
+        <>
+          <Line />
 
-      <LocationInfo 
-        icon={FlagCheckered}
-        label={arrival.label}
-        description={arrival.description}
-      />
+          <LocationInfo 
+            icon={FlagCheckered}
+            label={arrival.label}
+            description={arrival.description}
+          />
+        </>
+      )}
+      
     </Container>
   );
 }
