@@ -64,9 +64,12 @@ export function Arrival() {
         return Alert.alert('Erro', 'Não foi possível obter os dados para registrar a chegada do veículo.')
       }
 
+      const locations = await getStorageLocations()
+
       realm.write(() => {
         historic.status = 'arrival';
         historic.updated_at = new Date();
+        historic.coords.push(...locations)
       });
 
       await stopLocationTask()
