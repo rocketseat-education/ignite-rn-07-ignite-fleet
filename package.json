@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/roboto": "^0.2.3",
+    "@react-native-google-signin/google-signin": "^10.1.1",
     "@realm/react": "^0.4.3",
     "expo": "~48.0.11",
     "expo-auth-session": "~4.0.3",

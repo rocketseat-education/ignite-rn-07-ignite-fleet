@@ -1,45 +1,45 @@
-import { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
-import * as WebBrowser from 'expo-web-browser';
-import * as Google from 'expo-auth-session/providers/google';
-
+import { useState } from 'react';
 import { Container, Title, Slogan } from './styles';
+import { GoogleSignin } from '@react-native-google-signin/google-signin'
+import { Realm, useApp } from '@realm/react'
 
 import backgroundImg from '../../assets/background.png'
 import { Button } from '../../components/Button';
 
-import { ANDROID_CLIENT_ID, IOS_CLIENT_ID } from '@env';
+import { WEB_CLIENT_ID, IOS_CLIENT_ID } from '@env'
+import { Alert } from 'react-native';
 
-WebBrowser.maybeCompleteAuthSession();
+GoogleSignin.configure({
+  scopes: ['email', 'profile'],
+  webClientId: WEB_CLIENT_ID,
+  iosClientId: IOS_CLIENT_ID
+})
 
 export function SignIn() {
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
-  const [_, response, googleSignIng] = Google.useAuthRequest({
-    androidClientId: ANDROID_CLIENT_ID,
-    iosClientId: IOS_CLIENT_ID,
-    scopes: ['profile', 'email']
-  });
+  const [isAutenticating, setIsAuthenticanting] = useState(false)
+  const app = useApp()
 
-  function handleGoogleSignIn(){
-    setIsAuthenticating(true);
+  async function handleGoogleSignIn() {
+    try {
+      setIsAuthenticanting(true)
 
-    googleSignIng().then(response => {
-      if(response?.type !== 'success') {
-        setIsAuthenticating(false);
-      }
-    })
-  }
+      const { idToken } = await GoogleSignin.signIn()
+      
+      if(idToken) {
+        const credentials = Realm.Credentials.jwt(idToken)
 
-  useEffect(() => {
-    if(response?.type === 'success') {
-      if(response.authentication?.idToken) {
-        
+        await app.logIn(credentials)
       } else {
-        Alert.alert('Entrar', 'Não foi possível conectar-se a sua conta google.')
-        setIsAuthenticating(false);
+        Alert.alert('Entrar', "Não foi possível conectar-se a sua conta google.")
+        setIsAuthenticanting(false)  
       }
+
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Entrar', "Não foi possível conectar-se a sua conta google.")
+      setIsAuthenticanting(false)
     }
-  },[response])
+  }
 
   return (
     <Container source={backgroundImg}>
@@ -49,11 +49,7 @@ export function SignIn() {
         Gestão de uso de veículos
       </Slogan>
 
-      <Button 
-        title='Entrar com Google' 
-        onPress={handleGoogleSignIn} 
-        isLoading={isAuthenticating} 
-      />
+      <Button title='Entrar com Google' onPress={handleGoogleSignIn} isLoading={isAutenticating} />
     </Container>
   );
 }
