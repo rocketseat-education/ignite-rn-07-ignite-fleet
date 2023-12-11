@@ -9,14 +9,15 @@
   },
   "dependencies": {
     "@expo-google-fonts/roboto": "^0.2.3",
+    "@react-native-google-signin/google-signin": "^10.1.1",
     "expo": "~48.0.11",
     "expo-font": "~11.1.1",
+    "expo-splash-screen": "~0.18.1",
     "expo-status-bar": "~1.4.4",
+    "expo-system-ui": "~2.2.1",
     "react": "18.2.0",
     "react-native": "0.71.6",
-    "styled-components": "^5.3.9",
-    "expo-splash-screen": "~0.18.1",
-    "expo-system-ui": "~2.2.1"
+    "styled-components": "^5.3.9"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
